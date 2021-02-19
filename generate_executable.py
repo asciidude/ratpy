@@ -14,7 +14,6 @@ if missing:
     print("Error: pyinstaller not found, please install pyinstaller - if you get an error while installing, try installing with administrator permissions")
     sys.exit()
 
-print("If you do not have Windows; this will likely fail to run")
 while onefile == None:
     yn = input("Do you want the program to be ran in one file? (Y/N) ")
 
