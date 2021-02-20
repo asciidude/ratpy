@@ -1,3 +1,4 @@
+![Build Status](https://img.shields.io/github/checks-status/thread90/ratpy/main?label=checks&style=flat) ![Discord](https://img.shields.io/discord/801489723927166986)
 # ratpy
 RAT (Remote Access Trojan) made in Python - using sockets<br>
 *Python version: 3.9.0*
