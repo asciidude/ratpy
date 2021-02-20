@@ -1,4 +1,4 @@
-![Build Status](https://img.shields.io/github/checks-status/thread90/ratpy/main?label=checks&style=flat) ![Discord](https://img.shields.io/discord/801489723927166986)
+![Build Status](https://img.shields.io/github/checks-status/thread90/ratpy/main?label=checks&style=flat) ![Discord](https://img.shields.io/discord/801489723927166986) ![Repo Size](https://img.shields.io/github/repo-size/thread90/ratpy)
 # ratpy
 RAT (Remote Access Trojan) made in Python - using sockets<br>
 *Python version: 3.9.0*
