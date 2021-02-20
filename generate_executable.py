@@ -15,7 +15,7 @@ if missing:
     sys.exit()
 
 while onefile == None:
-    yn = input("Do you want the program to be ran in one file? (Y/N) ")
+    yn = input("Do you want the program to be saved in one file? (Y/N) ")
 
     if yn.lower() == "y":
         onefile = True
