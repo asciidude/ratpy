@@ -1,5 +1,5 @@
 # ratpy
-RAT (Remote Access Trojan) made in Python - using sockets\n
+RAT (Remote Access Trojan) made in Python - using sockets<br>
 *Python version: 3.9.0*
 
 # installation
