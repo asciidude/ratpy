@@ -1,6 +1,6 @@
 # ratpy
-RAT (Remote Access Trojan) made in Python - using sockets
-**Python version: 3.9.0**
+RAT (Remote Access Trojan) made in Python - using sockets\n
+*Python version: 3.9.0*
 
 # installation
 The installation is simple, simply do `py -m pip install -r requirements.txt`
