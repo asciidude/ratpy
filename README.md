@@ -17,6 +17,7 @@ To configure ratpy, go into `server.py` and manually change the variables under 
 # updates
 * configurable variables
 * removed showcamera
+* removed screenshot
 * showalert command<br>
 
 # feature requests / bug reports
