@@ -16,7 +16,6 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostbyname(socket.gethostname())
 opensocket = True
 ss_num = 0
-w_num = 0
 
 # CONFIGURABLE SETTINGS
 port = 25565
