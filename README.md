@@ -11,6 +11,15 @@ The installation is simple, simply do `py -m pip install -r requirements.txt`
 # commands
 A list of commands can be found by using the `help` command
 
+# configuration
+To configure ratpy, go into `server.py` and manually change the variables under "CONFIGURABLE SETTINGS"
+
+# updates
+* configurable variables
+* startup option
+* removed showcamera
+* showalert command
+
 # feature requests / bug reports
 Report bugs or request features to me on my Discord: @pxpcandy#4415
 
