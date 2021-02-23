@@ -3,8 +3,6 @@
 RAT (Remote Access Trojan) made in Python - using sockets<br>
 *Python version: 3.9.0*
 
-I'm aware that showcamera is not working, I am currently fixing it
-
 # installation
 The installation is simple, simply do `py -m pip install -r requirements.txt`
 
